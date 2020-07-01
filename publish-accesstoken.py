@@ -39,7 +39,7 @@ def lambda_handler(event, context):
         redirect_to = 'https://alexa.amazon.co.jp/spa/skill/account-linking-status.html?vendorId=' + vender_id
         fragment = 'state=' + state + '&' + 'access_token=' + access_token + '&' + 'token_type=bearer'
         location = redirect_to + '#' + fragment
-        print(location)
+        #print(location)
 
         # set id
         seqtable = dynamodb.Table('sequence')
@@ -61,7 +61,7 @@ def lambda_handler(event, context):
                 'email': email,
                 'zip': zipcode,
                 'access_token': access_token,
-                'expires_in': expires_in,
+#                'expires_in': expires_in,
                 'accepted_at': decimal.Decimal(str(now))
             })
 
