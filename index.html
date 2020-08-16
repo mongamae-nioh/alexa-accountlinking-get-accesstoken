@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- CF -> S3 -> APIGW -->
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <form name="myform" method="POST">
+            氏名：<input type="text" name="username"><br>
+            メールアドレス：<input type="text" name="email"><br>
+            郵便番号：<input type="text" name="zip">
+            <input type="button" value="登録" onclick="window.location.href=checkText()">
+        </form>
+        <script>
+            function getParam(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            function checkText() {
+                var posturl = "<APIGateway URL>"
+                + "client_id=" + getParam('client_id') 
+                + "&code=" + getParam('code') 
+//                + "&code=test" 
+                + "&state=" + getParam('state') 
+                + "&redirect_uri=" + "<Alexa用リダイレクトURL>";
+//                + "&grant_type=authorization_code"
+//                document.myform.action=posturl;
+                return posturl;
+            }
+        </script>
+    </body>
+</html>
